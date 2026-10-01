@@ -1,0 +1,226 @@
+:root {
+  color: #18201b;
+  background: #edf0e7;
+  font-family: Georgia, "Times New Roman", serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button {
+  font: inherit;
+}
+
+.appShell {
+  min-height: 100vh;
+  padding: clamp(18px, 3vw, 42px);
+  background:
+    linear-gradient(90deg, rgba(24, 32, 27, 0.06) 1px, transparent 1px),
+    linear-gradient(rgba(24, 32, 27, 0.06) 1px, transparent 1px),
+    #edf0e7;
+  background-size: 34px 34px;
+}
+
+.gamePanel {
+  display: grid;
+  grid-template-columns: minmax(128px, 0.45fr) minmax(280px, 1fr);
+  gap: clamp(14px, 2vw, 26px);
+  max-width: 860px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.scoreRail,
+.boardWrap,
+.moveLog {
+  border: 2px solid #18201b;
+  background: rgba(250, 248, 238, 0.92);
+  box-shadow: 8px 8px 0 #18201b;
+}
+
+.scoreRail {
+  display: grid;
+  align-content: center;
+  gap: 14px;
+  padding: 18px;
+}
+
+.playerBadge {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 8px;
+  border: 2px solid rgba(24, 32, 27, 0.2);
+  background: #f8f0d8;
+}
+
+.playerBadge.isActive {
+  border-color: #18201b;
+  background: #f9d45a;
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 2px solid currentColor;
+  font-size: 1.45rem;
+  font-weight: 900;
+}
+
+.markHuman {
+  color: #c3372a;
+}
+
+.markAgent {
+  color: #196b69;
+}
+
+.boardWrap {
+  padding: clamp(16px, 3vw, 28px);
+}
+
+.statusRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.statusRow p {
+  margin: 0;
+  font-size: clamp(1.3rem, 2vw, 2rem);
+  font-weight: 900;
+}
+
+.resetButton {
+  min-height: 42px;
+  border: 2px solid #18201b;
+  color: #18201b;
+  background: #f9d45a;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.resetButton {
+  padding: 0 16px;
+  box-shadow: 4px 4px 0 #18201b;
+}
+
+.resetButton:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #18201b;
+}
+
+.resetButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.resetButton:hover:disabled {
+  transform: none;
+  box-shadow: 4px 4px 0 #18201b;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(74px, 1fr));
+  gap: clamp(10px, 1.5vw, 16px);
+  aspect-ratio: 1;
+}
+
+.slot {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  aspect-ratio: 1;
+  border: 3px solid #18201b;
+  background: #fffaf0;
+  color: #18201b;
+  cursor: pointer;
+  font-size: clamp(2.5rem, 8vw, 5.8rem);
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: 6px 6px 0 rgba(24, 32, 27, 0.95);
+  transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
+}
+
+.slot:hover:not(:disabled) {
+  transform: translate(-3px, -3px);
+  background: #f9d45a;
+  box-shadow: 9px 9px 0 rgba(24, 32, 27, 0.95);
+}
+
+.slot:disabled {
+  cursor: not-allowed;
+}
+
+.slot.isFilled {
+  background: #f8f0d8;
+}
+
+.slot.isWinner {
+  background: #9fd3bf;
+}
+
+.moveLog {
+  max-width: 860px;
+  margin: 28px auto 0;
+  padding: 16px 18px;
+  font-family: "Courier New", monospace;
+}
+
+.moveLog p {
+  margin: 0;
+}
+
+.moveLog p + p {
+  margin-top: 6px;
+}
+
+@media (max-width: 860px) {
+  .gamePanel {
+    grid-template-columns: 1fr;
+  }
+
+  .scoreRail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .appShell {
+    padding: 14px;
+  }
+
+  .statusRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .scoreRail {
+    grid-template-columns: 1fr;
+  }
+
+  .board {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
