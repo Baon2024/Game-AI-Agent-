@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import speakMoveReasoning from "./elevenlabsHelper";
 
 export default function useAgent(gameId) {
   //const [agentToolsAndSchema, setAgentToolsAndSchema] = useState({});
@@ -206,6 +207,12 @@ export default function useAgent(gameId) {
         const toolName = data.tool_call_name;
         const toolCallId = data.tool_call_id;
         const toolArgs = data.tool_call_arguments ?? {};
+
+        // code to speak the message
+        const toolReasoning = data.move_reasoning ?? null
+        void speakMoveReasoning(toolReasoning)
+
+
         const result = executeAgentTool(toolName, toolArgs);
         console.log("[agent-hook] sending tool_call_response", {
           toolName,
